@@ -1,0 +1,14 @@
+#!/bin/bash
+wget $1 -O index.html
+file=index.html
+cat $file | grep "/track/" | grep -o '/track/[^"]*' | sed 's/\/track\///' > tracks.txt
+cat $file | grep "/album/" | grep -o '/album/[^"]*' | sed 's/\/album\///' > albums.txt
+
+if [[ $1 =~ ^https://([a-zA-Z0-9-]+)\.bandcamp\.com ]]; then   artist_name=${BASH_REMATCH[1]};   echo "Artist Name: $artist_name"; fi
+echo "EXTRACTED TRACKS AND ALBUMS! Artist name = $artist_name"
+
+echo "Downloading tracks now!"
+
+cat tracks.txt | xargs -I {} bandcamp-dl --artist="$artist_name" --track="{}" --base-dir="."
+
+cat albums.txt | xargs -I {} bandcamp-dl --artist="$artist_name" --album="{}" --base-dir="."

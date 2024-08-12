@@ -1,0 +1,10 @@
+#!/bin/bash
+pulseaudio --kill
+echo "Killed pulse"
+sudo apt purge pulseaudio -y
+echo "Purged pulse"
+echo "Press enter to continue"
+read
+sudo apt install pulseaudio -y
+echo "Reinstalled pulse"
+pulseaudio --start

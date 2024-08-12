@@ -1,0 +1,5 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+./cpuStress.sh &
+./gpuStress.sh &
+./psensor.sh &

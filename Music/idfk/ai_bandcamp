@@ -1,0 +1,39 @@
+#!/bin/bash
+# fetch index.html from argument
+wget "$1"
+
+# find every href in index.html
+grep -oP '(?<=href=")[^"]+' index.html > links.txt
+
+# fetch artist name from https://<here>.bandcamp.com/album/
+artist=$(grep -oP '(?<=https://)[^\.]+' links.txt)
+
+# fetch album names from https://<here>.bandcamp.com/album/
+albums=$(grep -oP '(?<=https://[^/]+/album/)[^"]+' links.txt)
+
+# Store list of albums in a file
+echo "$albums" > albums.txt
+
+# Store list of tracks in a file
+grep -oP '(?<=https://[^/]+/album/[^/]+/track/)[^"]+' links.txt > tracks.txt
+
+# using bandcamp-dl --artist=<artist> --album=<album> download albums do this one by one
+for album in $(cat albums.txt); do
+    bandcamp-dl --artist="$artist" --album="$album"
+done
+
+# using bandcamp-dl --artist=<artist> --track=<track> download tracks
+for track in $(cat tracks.txt); do
+    bandcamp-dl --artist="$artist" --track="$track"
+done
+
+# remove index.html and links.txt
+#rm index.html
+#rm links.txt
+#rm albums.txt
+#rm tracks.txt
+
+# Output success message
+echo "Download complete!"
+
+
