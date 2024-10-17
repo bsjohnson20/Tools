@@ -1,0 +1,1 @@
+2024/09/16 13:28:45 NOTICE: yt-dlp: Can't follow symlink without -L/--copy-links

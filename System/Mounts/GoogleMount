@@ -1,0 +1,3 @@
+#!/bin/dash
+mkdir -p ~/GDrive
+rclone --vfs-cache-mode writes mount gdrive: ~/GDrive &
