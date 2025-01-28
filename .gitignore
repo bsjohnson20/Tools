@@ -2,9 +2,15 @@ Music/idfk/*.html
 yt-dlp_linux
 Tools.desktop
 *.html
+
+# fetched output links from bandcamp
 Music/idfk/links.txt
 Music/idfk/albums.txt
 Music/BANDCAMP/tracks.txt
 Music/BANDCAMP/albums.txt
 Music/tracks.txt
 Music/albums.txt
+Misc/github_stars/.env
+
+# html from websites
+Misc/github_stars/test.txt

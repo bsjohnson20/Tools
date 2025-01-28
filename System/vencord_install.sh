@@ -1,5 +1,6 @@
 #!/bin/bash
-sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/VencordInstaller/main/install.sh)"
-killall Discord
-flatpak run com.discordapp.Discord ./program.log 2>&1 &
-disown
+
+# Still not working properly
+nohup sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/V21:10:22.169)" > /dev/null 2>&1 & 
+killall Discord 
+flatpak run com.discordapp.Discord & disown
