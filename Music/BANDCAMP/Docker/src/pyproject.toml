@@ -1,0 +1,13 @@
+[project]
+name = "bandcamp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "bandcamp-api>=0.2.3",
+    "bandcamp-downloader>=0.0.17",
+    "beautifulsoup4>=4.13.4",
+    "flask>=3.1.0",
+    "nicegui>=2.16.1",
+]
