@@ -3,17 +3,3 @@ services:
     build: .
     ports:
       - "8000:8000"
-  heimdall:
-    image: lscr.io/linuxserver/heimdall:latest
-    container_name: heimdall
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ./config:/config
-    ports:
-      - 6218:8000
-      - 6219:80
-      - 6220:443
-    restart: unless-stopped

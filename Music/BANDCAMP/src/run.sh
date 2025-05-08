@@ -2,9 +2,10 @@
 
 # entrypoint docker
 # activate .venv
+rm music.zip
 mv ./src .
 ls -a .
-source .venv/bin/activate
-.venv/bin/python main.py
+uv run main.py
+# .venv/bin/python main.py
 
 while true; do sleep 1000; done

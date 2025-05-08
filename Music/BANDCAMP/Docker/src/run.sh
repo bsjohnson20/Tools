@@ -4,7 +4,7 @@
 # activate .venv
 mv ./src .
 ls -a .
-source .venv/bin/activate
-python3 main.py
+uv run main.py
+# .venv/bin/python main.py
 
 while true; do sleep 1000; done

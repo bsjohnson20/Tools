@@ -2,18 +2,12 @@ from nicegui import ui
 from nicegui import background_tasks
 from nicegui.events import ValueChangeEventArguments
 import asyncio
+import os
 
 # async stuff
 from functools import partial
-
-from bs4 import BeautifulSoup
-import requests
-import re
 from bandcamp_api import Bandcamp
 bc = Bandcamp()
-import subprocess as sp
-import os
-import shutil
 # def show(event: ValueChangeEventArguments):
 #     name = type(event.sender).__name__
 #     ui.notify(f'{name}: {event.value}')
@@ -36,10 +30,6 @@ class main:
 
 
         ui.run(port=8000)
-
-    def sanitise_url(self, url):
-        # remove any non alphanumeric characters except &, - and .
-        return re.sub(r'[^a-zA-Z0-9&-.]', '', url)
 
     async def download(self, url):
         # bandcamp-downloader
@@ -76,7 +66,7 @@ class main:
         
 
     def check_valid_url(self, url):
-        url
+        # Todo, update with actually checking properly
         if "bandcamp.com" in url:
             return True
         else:
@@ -136,9 +126,9 @@ class main:
         with ui.row():
             t_container = ui.column()
             with t_container:
-                x = ui.label(f"{columns['track_title']}: {rows['track_title']}").classes("text-lg")
-                y = ui.label(f"{columns['artist_title']}: {rows['artist_title']}").classes("text-lg")
-                z = ui.label(f"{columns['album_title']}: {rows['album_title']}").classes("text-lg")
+                ui.label(f"{columns['track_title']}: {rows['track_title']}").classes("text-lg")
+                ui.label(f"{columns['artist_title']}: {rows['artist_title']}").classes("text-lg")
+                ui.label(f"{columns['album_title']}: {rows['album_title']}").classes("text-lg")
                 ui.button("Delete", on_click=lambda: t_container.delete()).classes("w-1/2")
                 ui.button("Download", on_click=lambda: self.begin_download(url)).classes("w-1/2")
             
