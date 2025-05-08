@@ -1,19 +1,10 @@
-import asyncio
 import functools
 import re
-import urllib.request
-import bandcamp_dl
 import subprocess as sp
-import os
-import shutil
 import logging as l
-import requests
-import urllib
-from urllib.error import URLError
+import time
 
 
-from requests.adapters import HTTPAdapter
-import urllib3
 
 def logger():
     logger = l.getLogger('bandcamp_dl')
@@ -50,11 +41,13 @@ class Downloader:
         return True
     
     def zip_music(self, tmp_dir) -> str:
+        current_time = str(int(time.time()))
+        file_name = current_time # generated based on time
         print("Zipping music: " + tmp_dir)
-        process_7z = sp.Popen(['7z', 'a', '/tmp/music.zip', f'{tmp_dir}/*']) #
+        process_7z = sp.Popen(['7z', 'a', f'/tmp/{file_name}.zip', f'{tmp_dir}/*']) #
         process_7z.wait()
         # return location of zip file
-        return '/tmp/music.zip'
+        return f'/tmp/{file_name}.zip'
 
     def download(self, url) -> bool:
         if not self.check_url_exists(url):

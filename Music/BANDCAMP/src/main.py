@@ -1,3 +1,4 @@
+from functools import partial
 from multiprocessing import Value
 from nicegui import ui, run
 import metadata_fetcher
@@ -14,6 +15,11 @@ class main:
 
         self.setup_ui()
 
+
+    def finish_download(self, path):
+        ui.download.file(path, "music.zip")
+        self.container.clear()
+
     async def prepare_download(self, url):
         
         # url = ValueChangeEventArguments.value
@@ -26,10 +32,9 @@ class main:
         download_path = await run.cpu_bound(self.downloader.download, url)
         ui.notify("Download complete, zipping music...")
         path = await run.cpu_bound(self.downloader.zip_music, download_path)
-        ui.notify("Zipping complete, downloading zip...")
-        ui.download.file(path, "music.zip")
-        ui.notify("Download complete")
-        self.container.clear()
+        with self.box:
+            ui.button("Download Complete. Grab music link:", on_click=partial(self.finish_download, path))
+        
 
         
 
@@ -48,16 +53,16 @@ class main:
         
         
         # Table with details
-        box = ui.label()
-        with box:
-            box.url = url
+        self.box = ui.label()
+        with self.box:
+            self.box.url = url
             ui.table(rows=rows, row_key="title")
-            ui.button("Delete", on_click=box.delete)
+            ui.button("Delete", on_click=self.box.delete)
             ui.button("Download", on_click=lambda x: self.prepare_download(url))
 
     def setup_ui(self):
         # Title with Bandcamp Downloader
-        ui.label("Bandcamp Downloader v0.0.1").classes("text-2xl font-bold")
+        ui.label("Bandcamp Downloader v0.0.2").classes("text-2xl font-bold")
 
         ui.label("Bandcamp URL (album/track/artist, example: https://bandcamp.com/album/album-name or https://bandcamp.com/track/track-name or https://bandcamp.com/artist/artist-name)").classes("text-lg")
         ui.label("Please enter the URL below").classes("text-lg")
