@@ -55,7 +55,7 @@ class Downloader:
         self.tmp_dir = self.create_tmp(url)
         
         log.info("Downloading music to: " + self.tmp_dir)
-        command = ['uv', 'run', 'bandcamp-dl', "--base-dir="+'.'+"/", url, "-re"]
+        command = ['uv', 'run', 'bandcamp-dl', "--base-dir="+'.'+"/", url]
         log.info("Running bandcamp with args: " + str(command))
         process = sp.Popen(command, cwd=self.tmp_dir, stdout=sp.PIPE, stderr=sp.PIPE)
         output, error = process.communicate()

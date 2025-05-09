@@ -2,7 +2,7 @@ FROM ubuntu:24.04
 
 
 WORKDIR /app
-RUN apt-get update && apt-get install -y wget cargo libxml2-dev libxslt-dev 7zip
+RUN apt-get update && apt-get install -y wget 7zip
 COPY src/ /app
 RUN rm -rf /app/.venv
 RUN wget -qO- https://astral.sh/uv/install.sh | sh

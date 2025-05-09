@@ -21,7 +21,8 @@ class main:
         self.container.clear()
 
     async def prepare_download(self, url):
-        
+        with self.box:
+            ui.spinner(size='lg')
         # url = ValueChangeEventArguments.value
 
         if not self.downloader.check_url_exists(url):
@@ -34,8 +35,7 @@ class main:
         path = await run.cpu_bound(self.downloader.zip_music, download_path)
         with self.box:
             ui.button("Download Complete. Grab music link:", on_click=partial(self.finish_download, path))
-        
-
+            
         
 
 
@@ -59,6 +59,9 @@ class main:
             ui.table(rows=rows, row_key="title")
             ui.button("Delete", on_click=self.box.delete)
             ui.button("Download", on_click=lambda x: self.prepare_download(url))
+            
+
+            
 
     def setup_ui(self):
         # Title with Bandcamp Downloader

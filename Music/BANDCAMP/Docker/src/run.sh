@@ -2,6 +2,7 @@
 
 # entrypoint docker
 # activate .venv
+rm music.zip
 mv ./src .
 ls -a .
 uv run main.py

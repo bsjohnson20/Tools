@@ -1,3 +1,13 @@
+"""
+Initial write of entire program. Wrote in a day.
+
+Rewritten into the new main.py with a few other files imported.
+
+Attempted to keep main.py predominantly UI with imported files to do the logic code
+
+Left here to compare between new/old
+"""
+
 from nicegui import ui
 from nicegui import background_tasks
 from nicegui.events import ValueChangeEventArguments
