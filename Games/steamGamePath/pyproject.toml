@@ -6,5 +6,6 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "prompt-toolkit>=3.0.51",
+    "rich>=14.0.0",
     "vdf>=3.4",
 ]
